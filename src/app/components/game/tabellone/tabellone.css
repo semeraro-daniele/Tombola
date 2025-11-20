@@ -41,6 +41,14 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
+.paused-message {
+    text-align: center;
+    font-size: 36px;
+    color: #c41e3a;
+    font-weight: 600;
+    margin-top: 12px;
+}
+
 .tabellone .riga {
     display: flex;
     gap: 4px;

@@ -25,6 +25,7 @@
 @if (endGame) {
 <p class="title">{{ 'game.board.end_extractions' | translate }}</p>
 }
+@if (lobbyService.isHost || (!isPaused && !endGame)) {
 <div class="tabellone">
     @for (row of rows; track $index) {
     <div class="riga">
@@ -36,3 +37,10 @@
     </div>
     }
 </div>
+}
+
+@if (!lobbyService.isHost && isPaused) {
+<div class="paused-message">
+    {{ 'game.board.draw.paused' | translate }}
+</div>
+}

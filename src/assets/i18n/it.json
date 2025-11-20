@@ -43,6 +43,7 @@
         "board.draw.speed": "Velcoità",
         "board.draw.pause": "Pausa",
         "board.draw.resume": "Riprendi",
+        "board.draw.paused": "Estrazione in pausa",
         "card.title": "Scheda",
         "actions.ambo": "Ambo",
         "actions.terna": "Terna",

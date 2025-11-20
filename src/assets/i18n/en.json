@@ -43,6 +43,7 @@
         "board.draw.speed": "Drawing speed",
         "board.draw.pause": "Pause",
         "board.draw.resume": "Resume",
+        "board.draw.paused": "Extraction paused",
         "card.title": "Card",
         "actions.ambo": "Ambo",
         "actions.terna": "Terna",
