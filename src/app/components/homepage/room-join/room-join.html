@@ -1,0 +1,17 @@
+<div class="room-container">
+  <h2 class="room-title">{{ 'homepage.join.title' | translate }}</h2>
+
+  <button class="room-btn" (click)="goBack()">← {{ 'common.back' | translate }}</button>
+
+  <div class="input-field">
+    <label>{{ 'common.yourName' | translate }}</label>
+    <input [(ngModel)]="playerName" placeholder="Nome giocatore" />
+  </div>
+
+  <div class="input-field">
+    <label>{{ 'lobby.roomCode' | translate }}</label>
+    <input [(ngModel)]="roomCode" placeholder="Codice stanza (es. AB12)" />
+  </div>
+
+  <button class="room-btn join-btn" (click)="joinRoom()">{{ 'common.enter' | translate }}</button>
+</div>

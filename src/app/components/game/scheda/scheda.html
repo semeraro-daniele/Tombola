@@ -1,0 +1,53 @@
+<h4>{{ 'game.card.title' | translate }}:</h4>
+
+<div class="scheda">
+    <div class="actions-button">
+        <button (click)="callAction('ambo')" [disabled]="isDeclaring || !isActionEnabled('ambo') || isActionCompleted('ambo')"
+            [class.disabled]="!isActionEnabled('ambo')" [class.next-action]="isActionEnabled('ambo')"
+            [class.completed]="isActionCompletedByMe('ambo')"
+            [class.completed-other]="isActionCompleted('ambo') && !isActionCompletedByMe('ambo')"
+            [class.pending]="isDeclaring">
+            {{ 'game.actions.ambo' | translate }}
+        </button>
+        <button (click)="callAction('terna')" [disabled]="isDeclaring || !isActionEnabled('terna') || isActionCompleted('terna')"
+            [class.disabled]="!isActionEnabled('terna')" [class.next-action]="isActionEnabled('terna')"
+            [class.completed]="isActionCompletedByMe('terna')"
+            [class.completed-other]="isActionCompleted('terna') && !isActionCompletedByMe('terna')"
+            [class.pending]="isDeclaring">
+            {{ 'game.actions.terna' | translate }}
+        </button>
+        <button (click)="callAction('quaterna')"
+            [disabled]="isDeclaring || !isActionEnabled('quaterna') || isActionCompleted('quaterna')"
+            [class.disabled]="!isActionEnabled('quaterna')" [class.next-action]="isActionEnabled('quaterna')"
+            [class.completed]="isActionCompletedByMe('quaterna')"
+            [class.completed-other]="isActionCompleted('quaterna') && !isActionCompletedByMe('quaterna')"
+            [class.pending]="isDeclaring">
+            {{ 'game.actions.quaterna' | translate }}
+        </button>
+        <button (click)="callAction('cinquina')"
+            [disabled]="isDeclaring || !isActionEnabled('cinquina') || isActionCompleted('cinquina')"
+            [class.disabled]="!isActionEnabled('cinquina')" [class.next-action]="isActionEnabled('cinquina')"
+            [class.completed]="isActionCompletedByMe('cinquina')"
+            [class.completed-other]="isActionCompleted('cinquina') && !isActionCompletedByMe('cinquina')"
+            [class.pending]="isDeclaring">
+            {{ 'game.actions.cinquina' | translate }}
+        </button>
+        <button (click)="callAction('tombola')" [disabled]="isDeclaring || !isActionEnabled('tombola') || isActionCompleted('tombola')"
+            [class.disabled]="!isActionEnabled('tombola')" [class.next-action]="isActionEnabled('tombola')"
+            [class.completed]="isActionCompletedByMe('tombola')"
+            [class.completed-other]="isActionCompleted('tombola') && !isActionCompletedByMe('tombola')"
+            [class.pending]="isDeclaring">
+            {{ 'game.actions.tombola' | translate }}
+        </button>
+    </div>
+
+    @for (row of scheda; track $index) {
+    <div class="riga">
+        @for (cell of row; track $index) {
+        <div class="cella" (click)="extractedNumber(cell)" [class.estratto]="cell.isExtracted">
+            {{ cell.value || '' }}
+        </div>
+        }
+    </div>
+    }
+</div>

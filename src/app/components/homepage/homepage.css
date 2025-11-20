@@ -1,0 +1,280 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  max-width: 600px;
+  margin: 60px auto;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.titolo-home {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 40px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+/* Selezione Modalità */
+.mode-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.btn-mode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 24px;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 120px;
+  width: 100%;
+}
+
+.btn-mode:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.btn-mode:active {
+  transform: translateY(0);
+}
+
+.btn-single {
+  border-color: #16a34a;
+}
+
+.btn-single:hover {
+  background: #f0fdf4;
+  border-color: #166534;
+}
+
+.btn-multi {
+  border-color: #c41e3a;
+}
+
+.btn-multi:hover {
+  background: #fef2f2;
+  border-color: #a01829;
+}
+
+.btn-icon {
+  font-size: 36px;
+  margin-bottom: 4px;
+}
+
+.btn-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.btn-description {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 400;
+  line-height: 1.4;
+  max-width: 280px;
+}
+
+/* Opzioni Multiplayer */
+.multiplayer-options {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.multiplayer-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.btn-multiplayer-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 24px;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 120px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-multiplayer-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.btn-multiplayer-action:active {
+  transform: translateY(0);
+}
+
+.btn-create {
+  border-color: #16a34a;
+}
+
+.btn-create:hover {
+  background: #f0fdf4;
+  border-color: #166534;
+}
+
+.btn-join {
+  border-color: #c41e3a;
+}
+
+.btn-join:hover {
+  background: #fef2f2;
+  border-color: #a01829;
+}
+
+.action-icon {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+.action-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.action-description {
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 400;
+  line-height: 1.4;
+  max-width: 300px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 40px 24px;
+    margin: 40px 16px;
+    max-width: 100%;
+  }
+
+  .titolo-home {
+    font-size: 24px;
+    margin-bottom: 32px;
+  }
+
+  .btn-mode {
+    padding: 24px 20px;
+    min-height: 110px;
+  }
+
+  .btn-icon {
+    font-size: 32px;
+  }
+
+  .btn-text {
+    font-size: 18px;
+  }
+
+  .btn-description {
+    font-size: 13px;
+  }
+
+  .btn-multiplayer-action {
+    padding: 22px 18px;
+    min-height: 100px;
+  }
+
+  .action-icon {
+    font-size: 28px;
+  }
+
+  .action-text {
+    font-size: 17px;
+  }
+
+  .action-description {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 32px 20px;
+    margin: 20px 12px;
+  }
+
+  .titolo-home {
+    font-size: 22px;
+    margin-bottom: 28px;
+  }
+
+  .btn-mode {
+    padding: 20px 16px;
+    min-height: 100px;
+    gap: 6px;
+  }
+
+  .btn-icon {
+    font-size: 28px;
+  }
+
+  .btn-text {
+    font-size: 17px;
+  }
+
+  .btn-description {
+    font-size: 12px;
+  }
+
+  .btn-multiplayer-action {
+    padding: 20px 16px;
+    min-height: 95px;
+  }
+
+  .action-icon {
+    font-size: 26px;
+  }
+
+  .action-text {
+    font-size: 16px;
+  }
+
+  .action-description {
+    font-size: 11px;
+  }
+}

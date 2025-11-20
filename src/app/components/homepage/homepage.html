@@ -1,0 +1,41 @@
+<div class="home-container">
+  <h1 class="titolo-home">
+    🎄 {{ 'homepage.welcome' | translate }} 🎄
+  </h1>
+
+  <!-- Selezione modalità -->
+  @if (!showMultiplayerOptions) {
+  <div class="mode-selection">
+    <button class="btn-mode btn-single" (click)="onStartSinglePlayer()">
+      <span class="btn-text">{{ 'homepage.single' | translate }}</span>
+      <span class="btn-description">{{ 'homepage.single.description' | translate }}</span>
+    </button>
+
+    <button class="btn-mode btn-multi" (click)="onShowMultiplayerOptions()">
+      <span class="btn-text">{{ 'homepage.multi' | translate }}</span>
+      <span class="btn-description">{{ 'homepage.multi.description' | translate }}</span>
+    </button>
+  </div>
+  }
+
+  <!-- Opzioni Multiplayer -->
+  @if (showMultiplayerOptions) {
+  <div class="multiplayer-options">
+    <button class="btn-back" (click)="onBackToModeSelection()">
+      ← {{ 'common.back' | translate }}
+    </button>
+
+    <div class="multiplayer-buttons">
+      <button class="btn-multiplayer-action btn-create" (click)="onCreateGame()">
+        <span class="action-text">{{ 'homepage.create' | translate }}</span>
+        <span class="action-description">{{ 'homepage.create.description' | translate }}</span>
+      </button>
+
+      <button class="btn-multiplayer-action btn-join" (click)="onJoinGame()">
+        <span class="action-text">{{ 'homepage.join' | translate }}</span>
+        <span class="action-description">{{ 'homepage.join.description' | translate }}</span>
+      </button>
+    </div>
+  </div>
+  }
+</div>

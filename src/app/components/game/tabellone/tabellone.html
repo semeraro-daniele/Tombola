@@ -1,0 +1,38 @@
+<h4>{{ 'game.board.title' | translate }}:</h4>
+
+<div class="last-extractions">
+    <h4>{{ 'game.board.last_extracted' | translate }}:</h4>
+    <div class="last-five">
+        @for (n of lastFive; track $index) {
+        <span class="last-num">{{ n }}</span>
+        }
+        @if (lastExtracted) {
+        <span class="last-num last">{{ lastExtracted.value }}</span>
+        }
+    </div>
+</div>
+
+@if (lobbyService.isHost) {
+<div class="draw-controls">
+    <label>{{ 'game.board.draw.speed' | translate }}: {{ drawSeconds }}s</label>
+    <input type="range" min="3" max="15" step="1" [value]="drawSeconds"
+        (input)="onDrawSpeedChange($event.target.value)">
+    <button class="btn-pause-resume" (click)="togglePause()">{{ isPaused ? ('game.board.draw.resume' | translate) :
+        ('game.board.draw.pause' | translate) }}</button>
+</div>
+}
+
+@if (endGame) {
+<p class="title">{{ 'game.board.end_extractions' | translate }}</p>
+}
+<div class="tabellone">
+    @for (row of rows; track $index) {
+    <div class="riga">
+        @for (extract of row; track extract.value) {
+        <div class="cella" [class.estratto]="extract.isExtracted">
+            {{ extract.value }}
+        </div>
+        }
+    </div>
+    }
+</div>

@@ -1,0 +1,60 @@
+{
+    "italian": "Italiano",
+    "english": "English",
+    "title": "Title",
+    "error-page": {
+        "404": "Page not found",
+        "description": "Sorry, the page that are you looking for doesn't exits.",
+        "back-home": "Back to homepage"
+    },
+    "homepage": {
+        "welcome": "Welcome to the Tombola game",
+        "single": "Single Player",
+        "single.description": "Play alone against the board",
+        "multi": "Multiplayer",
+        "multi.description": "Play with other players online",
+        "create": "Create Game",
+        "create.description": "Start a new game and invite other players",
+        "join": "Join Game",
+        "join.description": "Join an existing game",
+        "join.title": "Join Game",
+        "create.title": "Create Game",
+        "create.create_room": "Create room"
+    },
+    "lobby": {
+        "title": "Lobby",
+        "roomCode": "Room code",
+        "copy": "Copy",
+        "players": "Players",
+        "waiting_host_start": "Waiting for the host to start the ..",
+        "leave": "Leave lobby",
+        "start_game": "Start game",
+        "min_players_info": "At least 2 players are required to start"
+    },
+    "game": {
+        "title": "Christmas Tombola",
+        "room": "Room",
+        "won": "won",
+        "players": "Players",
+        "exit": "Leave game",
+        "board.title": "Board",
+        "board.last_extracted": "Last extracted",
+        "board.end_extractions": "Extractions finished!",
+        "board.draw.speed": "Drawing speed",
+        "board.draw.pause": "Pause",
+        "board.draw.resume": "Resume",
+        "card.title": "Card",
+        "actions.ambo": "Ambo",
+        "actions.terna": "Terna",
+        "actions.quaterna": "Quaterna",
+        "actions.cinquina": "Cinquina",
+        "actions.tombola": "Tombola"
+    },
+    "common": {
+        "back": "Back",
+        "you": "You",
+        "host": "Host",
+        "yourName": "Your name",
+        "enter": "Enter"
+    }
+}

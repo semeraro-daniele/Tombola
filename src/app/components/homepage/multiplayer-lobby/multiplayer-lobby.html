@@ -1,0 +1,60 @@
+<div class="lobby-container">
+  <h2 class="lobby-title">🎄 {{ 'lobby.title' | translate }} 🎄</h2>
+
+  <!-- Info stanza -->
+  <div class="room-info">
+    <div class="room-code-box">
+      <span class="room-label">{{ 'lobby.roomCode' | translate }}:</span>
+      <span class="room-code">{{ roomCode }}</span>
+      <button class="btn-copy" (click)="onCopyCode()">
+        📋 {{ 'lobby.copy' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista giocatori -->
+  <div class="players-section">
+    <h3 class="players-title">
+      {{ 'lobby.players' | translate }} ({{ players.length }})
+    </h3>
+    <div class="players-list">
+      @for (player of players; track player.id) {
+      <div class="player-item" [class.is-you]="player.name === playerName">
+        <span class="player-name">{{ player.name }}</span>
+        @if (player.name === playerName) {
+        <span class="you-badge">{{ 'common.you' | translate }}</span>
+        }
+        @if (isHost && player.name === players[0]?.name) {
+        <span class="host-badge">👑 {{ 'common.host' | translate }}</span>
+        }
+      </div>
+      }
+    </div>
+  </div>
+
+  <!-- Messaggio di attesa -->
+  @if (!isHost) {
+  <div class="waiting-message">
+    ⏳ {{ 'lobby.waiting_host_start' | translate }}
+  </div>
+  }
+
+  <!-- Pulsanti -->
+  <div class="lobby-actions">
+    <button class="btn-secondary" (click)="onLeave()">
+      ← {{ 'lobby.leave' | translate }}
+    </button>
+
+    @if (isHost) {
+    <button class="btn-primary" (click)="onStartGame()">
+      🎮 {{ 'lobby.start_game' | translate }}
+    </button>
+    }
+  </div>
+
+  <!-- Info minimo giocatori -->
+  @if (isHost && players.length < 2) { <p class="min-players-info">
+    ℹ️ {{ 'lobby.min_players_info' | translate }}
+    </p>
+    }
+</div>

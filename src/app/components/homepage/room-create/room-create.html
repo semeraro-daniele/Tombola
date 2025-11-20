@@ -1,0 +1,14 @@
+<div class="room-container">
+  <h2 class="room-title">{{ 'homepage.create.title' | translate }}</h2>
+
+  <button class="room-btn" (click)="goBack()">← {{ 'common.back' | translate }}</button>
+
+  <div class="input-field">
+    <label>{{ 'common.yourName' | translate }}</label>
+    <input [(ngModel)]="playerName" placeholder="Nome giocatore" />
+  </div>
+
+  <button class="room-btn create-btn" (click)="startRoom()">
+    {{ 'homepage.create.create_room' | translate }}
+  </button>
+</div>

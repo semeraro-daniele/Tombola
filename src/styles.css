@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+.btn-back {
+  margin-top: 32px;
+  padding: 14px 22px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 2px solid #c41e3a;
+  background: #ffffff;
+  transition: 0.2s ease;
+}
+
+.btn-back:hover {
+  background: #fef2f2;
+  border-color: #a01829;
+  color: #a01829;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}

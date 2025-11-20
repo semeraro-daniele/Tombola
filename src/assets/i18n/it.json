@@ -1,0 +1,60 @@
+{
+    "italian": "Italiano",
+    "english": "Inglese",
+    "title": "Titolo",
+    "error-page": {
+        "404": "Pagina non trovata",
+        "description": "Spiacenti, la pagina che stai cercando non esiste.",
+        "back-home": "Torna alla homepage"
+    },
+    "homepage": {
+        "welcome": "Benvenuto al gioco della tombola",
+        "single": "Giocatore Singolo",
+        "single.description": "Gioca da solo contro il tabellone",
+        "multi": "Multiplayer",
+        "multi.description": "Gioca con altri giocatori online",
+        "create": "Crea Partita",
+        "create.description": "Inizia una nuova partita e invita altri giocatori",
+        "join": "Partecipa",
+        "join.description": "Unisciti a una partita esistente",
+        "join.title": "Partecipa a Partita",
+        "create.title": "Crea Partita",
+        "create.create_room": "Crea stanza"
+    },
+    "lobby": {
+        "title": "Lobby",
+        "roomCode": "Codice stanza",
+        "copy": "Copia",
+        "players": "Giocatori",
+        "waiting_host_start": "In attesa che l'host avvii la partita...",
+        "leave": "Lascia lobby",
+        "start_game": "Avvia partita",
+        "min_players_info": "Servono almeno 2 giocatori per iniziare"
+    },
+    "game": {
+        "title": "Tombola di Natale",
+        "room": "Stanza",
+        "won": "vinto",
+        "players": "Giocatori",
+        "exit": "Esci dalla partita game",
+        "board.title": "Tabellone",
+        "board.last_extracted": "Ultimo estratto",
+        "board.end_extractions": "Estrazioni terminate!",
+        "board.draw.speed": "Velcoità",
+        "board.draw.pause": "Pausa",
+        "board.draw.resume": "Riprendi",
+        "card.title": "Scheda",
+        "actions.ambo": "Ambo",
+        "actions.terna": "Terna",
+        "actions.quaterna": "Quaterna",
+        "actions.cinquina": "Cinquina",
+        "actions.tombola": "Tombola"
+    },
+    "common": {
+        "back": "Indietro",
+        "you": "Tu",
+        "host": "Host",
+        "yourName": "Il tuo nome",
+        "enter": "Entra"
+    }
+}

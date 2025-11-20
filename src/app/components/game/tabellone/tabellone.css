@@ -1,0 +1,219 @@
+.tabellone {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #ffffff;
+    padding: 12px;
+    border: 1px solid #c41e3a;
+    border-radius: 8px;
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+}
+
+.draw-controls {
+    justify-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.btn-pause-resume {
+    margin-top: 32px;
+    padding: 7px 11px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 2px solid #c41e3a;
+    background: #ffffff;
+    transition: 0.2s ease;
+}
+
+.btn-pause-resume:hover {
+    background: #fef2f2;
+    border-color: #a01829;
+    color: #a01829;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.tabellone .riga {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0;
+    justify-content: center;
+}
+
+/* Spazio extra ogni 3 righe */
+.tabellone .riga:nth-child(3n) {
+    margin-bottom: 10px;
+}
+
+.tabellone .cella {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafafa;
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* Spazio extra ogni 5 colonne */
+.tabellone .cella:nth-child(5n) {
+    margin-right: 8px;
+}
+
+/* Rimuove il margin-right dall'ultima cella */
+.tabellone .cella:nth-child(10n) {
+    margin-right: 0;
+}
+
+/* Numero estratto */
+.tabellone .cella.estratto {
+    background-color: #c41e3a;
+    color: #ffffff;
+    border-color: #c41e3a;
+}
+
+.tabellone .cella:hover {
+    transform: scale(1.05);
+    border-color: #c41e3a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tabellone {
+        padding: 8px;
+        gap: 3px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .tabellone .riga {
+        gap: 2px;
+    }
+
+    .tabellone .riga:nth-child(3n) {
+        margin-bottom: 6px;
+    }
+
+    .tabellone .cella {
+        width: calc((100vw - 80px) / 10);
+        height: calc((100vw - 80px) / 10);
+        max-width: 28px;
+        max-height: 28px;
+        font-size: 11px;
+    }
+
+    .tabellone .cella:nth-child(5n) {
+        margin-right: 6px;
+    }
+
+    .tabellone .cella:nth-child(10n) {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabellone {
+        padding: 6px;
+        gap: 2px;
+    }
+
+    .tabellone .riga {
+        gap: 1.5px;
+    }
+
+    .tabellone .riga:nth-child(3n) {
+        margin-bottom: 5px;
+    }
+
+    .tabellone .cella {
+        width: calc((100vw - 60px) / 10);
+        height: calc((100vw - 60px) / 10);
+        max-width: 24px;
+        max-height: 24px;
+        font-size: 10px;
+        border-radius: 3px;
+    }
+
+    .tabellone .cella:nth-child(5n) {
+        margin-right: 4px;
+    }
+
+    .tabellone .cella:nth-child(10n) {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 380px) {
+    .tabellone {
+        padding: 5px;
+        gap: 1.5px;
+    }
+
+    .tabellone .riga {
+        gap: 1px;
+    }
+
+    .tabellone .cella {
+        width: calc((100vw - 50px) / 10);
+        height: calc((100vw - 50px) / 10);
+        max-width: 22px;
+        max-height: 22px;
+        font-size: 9px;
+    }
+
+    .tabellone .cella:nth-child(5n) {
+        margin-right: 3px;
+    }
+}
+
+.last-extractions {
+    margin-bottom: 12px;
+}
+
+.last-five {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.last-five .last-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    background: #f3f3f3;
+    border: 1px solid #e6e6e6;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Latest number: larger and bold */
+.last-five .last-num.last {
+    background: #c41e3a;
+    color: #fff;
+    border-color: #c41e3a;
+    font-size: 18px;
+    font-weight: 800;
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 6px 12px rgba(196,30,58,0.18);
+}

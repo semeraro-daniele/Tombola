@@ -1,0 +1,131 @@
+.room-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 32px;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    max-width: 500px;
+    margin: 60px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.3s ease;
+}
+
+.room-title {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+/* Input Section */
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-field label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.input-field input {
+    padding: 12px 14px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.input-field input:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Buttons */
+.room-btn {
+    padding: 14px 20px;
+    border: 2px solid #e8e8e8;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.room-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.1);
+}
+
+.room-btn:active {
+    transform: translateY(0);
+}
+
+/* Varianti */
+.start-btn {
+    border-color: #2563eb;
+    color: #1e3a8a;
+}
+
+.start-btn:hover {
+    background: #eff6ff;
+    border-color: #1e40af;
+}
+
+.create-btn {
+    border-color: #16a34a;
+    color: #166534;
+}
+
+.create-btn:hover {
+    background: #f0fdf4;
+    border-color: #14532d;
+}
+
+.join-btn {
+    border-color: #2563eb;
+    color: #1e3a8a;
+}
+
+.join-btn:hover {
+    background: #eff6ff;
+    border-color: #1e40af;
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .room-container {
+        padding: 28px 20px;
+        margin: 30px 16px;
+    }
+
+    .room-title {
+        font-size: 22px;
+    }
+}

@@ -1,0 +1,213 @@
+.tombola-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 40px;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  max-width: 1100px;
+  margin: 40px auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.game-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.titolo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.player-info {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+
+.player-name {
+  font-weight: 600;
+}
+
+.room-code {
+  background: #fafafa;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #e8e8e8;
+  font-weight: 600;
+}
+
+.host-badge {
+  padding: 4px 10px;
+  background: #c41e3a;
+  color: white;
+  font-size: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* Actions */
+.completed-actions {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 28px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.completed-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.actions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.action-badge {
+  background: linear-gradient(135deg, #1a5f3a, #2d8f56);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+.tombola-content {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.tabellone-wrapper,
+.schedina-wrapper {
+  padding: 22px;
+  background: #ffffff;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.players-sidebar {
+  margin-top: 36px;
+  padding: 20px;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  max-width: 300px;
+  width: 100%;
+}
+
+.players-sidebar h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.players-sidebar .players-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.players-sidebar li {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+  margin-bottom: 8px;
+  background: #fafafa;
+  transition: 0.2s ease;
+}
+
+.players-sidebar li.is-you {
+  background: #f0fdf4;
+  border-color: #16a34a;
+  font-weight: 600;
+}
+
+.you-badge {
+  font-size: 12px;
+  margin-left: 4px;
+  color: #16a34a;
+}
+
+.last-action-banner {
+  background: linear-gradient(135deg, #c41e3a, #e03a52);
+  color: #ffffff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  margin-top: 32px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(196, 30, 58, 0.25);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tombola-container {
+    padding: 32px 20px;
+    margin: 20px;
+  }
+
+  .tombola-content {
+    gap: 20px;
+  }
+
+  .tabellone-wrapper,
+  .schedina-wrapper,
+  .players-sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .tombola-container {
+    padding: 24px 14px;
+    margin: 12px;
+  }
+
+  .titolo {
+    font-size: 22px;
+  }
+
+  .btn-back {
+    width: 100%;
+  }
+}

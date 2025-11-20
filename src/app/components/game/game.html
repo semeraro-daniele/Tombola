@@ -1,0 +1,61 @@
+<div class="tombola-container">
+    <!-- Header con info giocatore e stanza -->
+    <div class="game-header">
+        <h2 class="titolo">🎄 {{ 'game.title' | translate }} 🎄</h2>
+
+        <div class="player-info">
+            <span class="player-name">👤 {{ playerName }}</span>
+            @if(!isSingleMode) {
+            <span class="room-code">{{ 'game.room' | translate }}: {{ roomCode }}</span>
+            @if (isHost) {
+            <span class="host-badge">👑 {{ 'common.host' | translate }}</span>
+            }
+            }
+        </div>
+    </div>
+
+    <!-- Contenuto principale -->
+    <div class="tombola-content">
+        <div class="tabellone-wrapper">
+            <app-tabellone></app-tabellone>
+        </div>
+
+        <div class="schedina-wrapper">
+            <app-scheda></app-scheda>
+        </div>
+    </div>
+
+    <!-- Banner ultima azione -->
+    @if (lastAction) {
+    <div class="last-action-banner">
+        🎉
+        {{ lastAction.toUpperCase() }}
+        @if (lastWinner) {
+        ({{ lastWinner }})
+        }
+        {{ 'game.won' | translate }}! 🎉
+    </div>
+    }
+
+    <!-- Lista giocatori -->
+    @if (!isSingleMode && players.length > 0) {
+    <div class="players-sidebar">
+        <h3>{{ 'game.players' | translate }} ({{ players.length }})</h3>
+        <ul class="players-list">
+            @for (player of players; track player.id) {
+            <li [class.is-you]="player.name === playerName">
+                {{ player.name }}
+                @if (player.name === playerName) {
+                <span class="you-badge">({{ 'common.you' | translate }})</span>
+                }
+            </li>
+            }
+        </ul>
+    </div>
+    }
+
+    <!-- Pulsante esci -->
+    <button class="btn-back" (click)="onLeaveGame()">
+        ← {{ 'game.exit' | translate }}
+    </button>
+</div>
