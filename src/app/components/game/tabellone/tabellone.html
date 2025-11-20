@@ -14,9 +14,11 @@
 
 @if (lobbyService.isHost) {
 <div class="draw-controls">
-    <label>{{ 'game.board.draw.speed' | translate }}: {{ drawSeconds }}s</label>
-    <input type="range" min="3" max="15" step="1" [value]="drawSeconds"
-        (input)="onDrawSpeedChange($event.target.value)">
+    <div class="draw-speed-control">
+        <label>{{ 'game.board.draw.speed' | translate }}: {{ drawSeconds }}s</label>
+        <input type="range" min="3" max="15" step="1" [value]="drawSeconds"
+            (input)="onDrawSpeedChange($event.target.value)">
+    </div>
     <button class="btn-pause-resume" (click)="togglePause()">{{ isPaused ? ('game.board.draw.resume' | translate) :
         ('game.board.draw.pause' | translate) }}</button>
 </div>
