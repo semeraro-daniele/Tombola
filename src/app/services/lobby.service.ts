@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environment';
 
 export interface Player {
   id: string;
@@ -55,7 +56,7 @@ export class LobbyService {
   private _localAutoDrawInterval: any = null;
 
   constructor() {
-    this.socket = io('http://localhost:3000');
+    this.socket = io(environment.apiUrl);
 
     // Aggiorna lista giocatori
     this.socket.on('playersUpdate', (players: Player[]) => {

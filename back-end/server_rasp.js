@@ -95,7 +95,7 @@ function startGame(roomCode) {
   return true;
 }
 
-//Helper: build state object to return to clients
+// Helper: build state object to return to clients
 function buildRoomStateForClient(roomCode) {
   const room = rooms[roomCode];
   if (!room) return null;
