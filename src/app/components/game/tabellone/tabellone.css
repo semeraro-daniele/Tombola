@@ -90,9 +90,8 @@
   margin-left: 0.6rem;
 }
 
-.tabellone .cell:nth-child(n + 21):nth-child(-n + 30),
-.tabellone .cell:nth-child(n + 51):nth-child(-n + 60),
-.tabellone .cell:nth-child(n + 81):nth-child(-n + 90) {
+.tabellone .cell:nth-child(n + 31):nth-child(-n + 40),
+.tabellone .cell:nth-child(n + 61):nth-child(-n + 70) {
   margin-top: 0.6rem;
 }
 
@@ -160,9 +159,8 @@
     margin-left: 0.7rem;
   }
 
-  .tabellone .cell:nth-child(n + 21):nth-child(-n + 30),
-  .tabellone .cell:nth-child(n + 51):nth-child(-n + 60),
-  .tabellone .cell:nth-child(n + 81):nth-child(-n + 90) {
+  .tabellone .cell:nth-child(n + 31):nth-child(-n + 40),
+  .tabellone .cell:nth-child(n + 61):nth-child(-n + 70) {
     margin-top: 0.7rem;
   }
 
@@ -228,9 +226,8 @@
     margin-left: 0.9rem;
   }
 
-  .tabellone .cell:nth-child(n + 21):nth-child(-n + 30),
-  .tabellone .cell:nth-child(n + 51):nth-child(-n + 60),
-  .tabellone .cell:nth-child(n + 81):nth-child(-n + 90) {
+  .tabellone .cell:nth-child(n + 31):nth-child(-n + 40),
+  .tabellone .cell:nth-child(n + 61):nth-child(-n + 70) {
     margin-top: 0.9rem;
   }
 
