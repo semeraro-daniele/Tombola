@@ -28,10 +28,10 @@
   grid-template-columns: 1fr;
   gap: 1.5rem;
   width: 100%;
-  max-width: 600px;
+  max-width: 37.5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .mode-selection {
     grid-template-columns: 1fr 1fr;
   }
@@ -55,8 +55,8 @@
 .btn-mode:hover {
   background-color: var(--secondary-color);
   color: var(--white);
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px var(--shadow-color);
+  transform: translateY(-0.3125rem);
+  box-shadow: 0 0.5rem 0.9375rem var(--shadow-color);
 }
 
 .btn-mode .icon {
@@ -91,7 +91,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 37.5rem;
   animation: fadeIn 0.5s ease;
 }
 
@@ -103,7 +103,7 @@
   margin-top: 2rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .multiplayer-actions {
     grid-template-columns: 1fr 1fr;
   }
@@ -125,8 +125,8 @@
 }
 
 .btn-action:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px var(--shadow-color);
+  transform: translateY(-0.3125rem);
+  box-shadow: 0 0.5rem 0.9375rem var(--shadow-color);
 }
 
 .btn-create {
@@ -177,7 +177,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(0.625rem);
   }
   to {
     opacity: 1;

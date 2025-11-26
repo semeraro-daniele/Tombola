@@ -4,7 +4,7 @@
 }
 
 .game-container {
-  max-width: 1200px;
+  max-width: 75rem;
   margin: 0 auto;
 }
 
@@ -45,7 +45,7 @@
   background-color: var(--white);
   padding: 1rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 15px var(--shadow-color);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-color);
   order: 1;
 }
 
@@ -60,7 +60,7 @@
   background-color: var(--white);
   padding: 1rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 15px var(--shadow-color);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-color);
 }
 
 .card-title {
@@ -121,7 +121,7 @@
   border-radius: 0.75rem;
   font-size: 1rem;
   font-weight: 600;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.3125rem 1.25rem rgba(0, 0, 0, 0.2);
   animation: banner-fade-in-out 4s ease-in-out;
   z-index: 1000;
   max-width: 90%;
@@ -132,7 +132,7 @@
   0%,
   100% {
     opacity: 0;
-    transform: translateX(-50%) translateY(20px);
+    transform: translateX(-50%) translateY(1.25rem);
   }
 
   10%,
@@ -143,7 +143,7 @@
 }
 
 /* Tablet */
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .game-title {
     font-size: 2rem;
   }
@@ -163,7 +163,7 @@
 }
 
 /* Desktop */
-@media (min-width: 992px) {
+@media (min-width: 62rem) {
   :host {
     padding: 1rem;
   }

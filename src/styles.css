@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--secondary-color);
   color: var(--white);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px var(--shadow-color);
+  box-shadow: 0 0.25rem 0.5rem var(--shadow-color);
 }
 
 .btn-secondary {
@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--primary-color);
   color: var(--white);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px var(--shadow-color);
+  box-shadow: 0 0.25rem 0.5rem var(--shadow-color);
 }
 
 .btn-primary-filled {
@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary-filled:hover {
   background-color: #166534;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px var(--shadow-color);
+  box-shadow: 0 0.25rem 0.5rem var(--shadow-color);
 }
 
 .btn-secondary-filled {
@@ -87,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-secondary-filled:hover {
   background-color: #a01829;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px var(--shadow-color);
+  box-shadow: 0 0.25rem 0.5rem var(--shadow-color);
 }
 
 .btn-back {
@@ -119,7 +119,7 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--white);
   padding: 2.5rem 2rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 15px var(--shadow-color);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-color);
   width: 100%;
 }
 
@@ -147,5 +147,5 @@ h1, h2, h3, h4, h5, h6 {
 .form-control:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+  box-shadow: 0 0 0 0.1875rem rgba(196, 30, 58, 0.1);
 }

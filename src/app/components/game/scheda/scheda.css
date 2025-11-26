@@ -3,7 +3,7 @@
   background-color: var(--white);
   padding: 1rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 15px var(--shadow-color);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-color);
 }
 
 .scheda-container {
@@ -27,7 +27,7 @@
 
 .action-buttons {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(4.375rem, 1fr));
   gap: 0.5rem;
 }
 
@@ -93,7 +93,7 @@
   background-color: var(--secondary-color);
   color: var(--white);
   transform: scale(1.08);
-  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+  box-shadow: 0 0.125rem 0.5rem rgba(22, 163, 74, 0.3);
 }
 
 @keyframes pulse-green {
@@ -102,7 +102,7 @@
   }
 
   70% {
-    box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
+    box-shadow: 0 0 0 0.625rem rgba(22, 163, 74, 0);
   }
 
   100% {
@@ -111,7 +111,7 @@
 }
 
 /* Tablet */
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   :host {
     padding: 1.25rem;
   }
@@ -129,7 +129,7 @@
   }
 
   .action-buttons {
-    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(4.6875rem, 1fr));
   }
 
   .action-buttons .btn {
@@ -152,7 +152,7 @@
 }
 
 /* Desktop */
-@media (min-width: 992px) {
+@media (min-width: 62rem) {
   :host {
     padding: 1.5rem;
   }
@@ -166,7 +166,7 @@
   }
 
   .action-buttons {
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
   }
 
   .action-buttons .btn {
@@ -185,9 +185,9 @@
 }
 
 /* Mobile very small - ottimizzazione per schermi stretti */
-@media (max-width: 400px) {
+@media (max-width: 25rem) {
   .action-buttons {
-    grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(4.0625rem, 1fr));
   }
 
   .action-buttons .btn {
