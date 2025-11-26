@@ -31,7 +31,8 @@
       <button (click)="callAction('tombola')"
         [disabled]="isDeclaring || !isActionEnabled('tombola') || isActionCompleted('tombola')"
         [class.next-action]="isActionEnabled('tombola')" [class.completed]="isActionCompletedByMe('tombola')"
-        [class.completed-other]="isActionCompleted('tombola') && !isActionCompletedByMe('tombola')" class="btn btn-primary">
+        [class.completed-other]="isActionCompleted('tombola') && !isActionCompletedByMe('tombola')"
+        class="btn btn-primary">
         <span>{{ 'game.actions.tombola' | translate }}</span>
       </button>
     </div>

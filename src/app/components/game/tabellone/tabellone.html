@@ -4,17 +4,21 @@
       <span class="label">{{ 'game.board.last_extracted' | translate }}</span>
       <span class="number">{{ lastExtracted?.value || '-' }}</span>
     </div>
+
     @if (lobbyService.isHost) {
+    @if (!endGame) {
     <div class="host-controls">
       <div class="speed-control">
         <label for="speed-slider">{{ 'game.board.draw.speed' | translate }}</label>
-        <input id="speed-slider" type="range" min="3" max="15" [value]="drawSeconds" (input)="onDrawSpeedChange($event.target.value)" />
+        <input id="speed-slider" type="range" min="3" max="15" [value]="drawSeconds"
+          (input)="onDrawSpeedChange($event.target.value)" />
         <span>{{ drawSeconds }}s</span>
       </div>
       <button class="btn btn-secondary" (click)="togglePause()">
         {{ isPaused ? ('game.board.draw.resume' | translate) : ('game.board.draw.pause' | translate) }}
       </button>
     </div>
+    }
     }
   </div>
 

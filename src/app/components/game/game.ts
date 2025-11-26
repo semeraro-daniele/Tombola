@@ -59,7 +59,7 @@ export class Game implements OnInit, OnDestroy {
     this.isHost = this.lobby.isHost;
     this.roomCode = state.roomCode;
 
-    this.isSingleMode = state.single
+    this.isSingleMode = state.single;
 
     // Resetta sempre il GameService
     this.gameService.resetGame();

@@ -6,7 +6,6 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../../services/language.service';
 import { LobbyService } from '../../../services/lobby.service';
 
-
 @Component({
   selector: 'app-room-join',
   standalone: true,
@@ -22,7 +21,7 @@ export class RoomJoin implements OnInit {
     private languageService: LanguageService,
     private translate: TranslateService,
     private lobby: LobbyService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {

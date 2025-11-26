@@ -58,7 +58,7 @@
 }
 
 .speed-control input[type="range"] {
-  width: 80px;
+  width: 5rem;
 }
 
 .host-controls .btn {
@@ -102,7 +102,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--white);
-  border: 1px solid var(--border-color);
+  border: 0.0625rem solid var(--border-color);
   border-radius: 0.25rem;
   font-weight: 600;
   aspect-ratio: 1 / 1;

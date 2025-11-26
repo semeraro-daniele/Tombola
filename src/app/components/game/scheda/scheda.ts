@@ -65,7 +65,7 @@ export class Scheda implements OnInit, OnDestroy {
     }
 
     const extractedNumbers = this.gameService.getExtractedNumbers();
-    const scheda2D = this.gameService.getScheda(); 
+    const scheda2D = this.gameService.getScheda();
 
     const validation = this.schedaService.validateScheda(scheda2D, extractedNumbers);
     if (!validation.isValid) {

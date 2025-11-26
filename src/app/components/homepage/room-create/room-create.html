@@ -4,12 +4,14 @@
 
     <div class="form-group">
       <label for="playerName">{{ 'common.yourName' | translate }}</label>
-      <input id="playerName" class="form-control" [(ngModel)]="playerName" placeholder="{{ 'homepage.create.player-name' | translate}}" />
+      <input id="playerName" class="form-control" [(ngModel)]="playerName"
+        placeholder="{{ 'homepage.create.player-name' | translate}}" />
     </div>
 
     <div class="form-actions">
       <button class="btn btn-secondary" (click)="goBack()">{{ 'common.back' | translate }}</button>
-      <button class="btn btn-primary-filled" (click)="startRoom()">{{ 'homepage.create.create_room' | translate }}</button>
+      <button class="btn btn-primary-filled" (click)="startRoom()">{{ 'homepage.create.create_room' | translate
+        }}</button>
     </div>
   </div>
 </div>

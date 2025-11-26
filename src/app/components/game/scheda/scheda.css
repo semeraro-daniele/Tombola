@@ -71,7 +71,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--border-color);
+  border: 0.0625rem solid var(--border-color);
   border-radius: 0.4rem;
   font-weight: 600;
   aspect-ratio: 1 / 1;
@@ -85,7 +85,7 @@
 
 .cell.empty {
   background-color: transparent;
-  border: 1px dashed var(--border-color);
+  border: 0.0625rem dashed var(--border-color);
   cursor: default;
 }
 
