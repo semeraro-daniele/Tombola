@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from '../../environment';
+import { environment } from '../../environments/environment';
 
 export interface Player {
   id: string;
