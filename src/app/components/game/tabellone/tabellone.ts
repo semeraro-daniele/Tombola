@@ -18,6 +18,7 @@ import { LobbyService } from '../../../services/lobby.service';
 export class Tabellone implements OnInit, OnDestroy {
   numbers: Extract[] = [];
   lastExtracted: Extract | null = null;
+  lastFive: number[] = [];
   endGame: boolean = false;
 
   private destroy$ = new Subject<void>();
@@ -85,6 +86,9 @@ export class Tabellone implements OnInit, OnDestroy {
     } else {
       this.lastExtracted = null;
     }
+
+    // Aggiorna gli ultimi 5 numeri
+    this.lastFive = extractedNumbers.slice(-6, -1);
 
     // Check if the game is over
     if (extractedNumbers.length >= 90) {

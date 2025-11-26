@@ -31,12 +31,23 @@
   color: var(--text-color);
 }
 
-.last-extracted-display .number {
+.last-five {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.last-five .number {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: var(--text-color);
   min-width: 2.1875rem;
   text-align: center;
+}
+
+.last-five .number:last-child {
+  color: var(--primary-color);
 }
 
 .host-controls {
@@ -128,11 +139,17 @@
     gap: 1rem;
   }
 
+  .last-extracted-display {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
   .last-extracted-display .label {
     font-size: 0.95rem;
   }
 
-  .last-extracted-display .number {
+  .last-five .number {
     font-size: 2rem;
     min-width: 2.8125rem;
   }
@@ -188,14 +205,14 @@
   }
 
   .last-extracted-display {
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .last-extracted-display .label {
     font-size: 1rem;
   }
 
-  .last-extracted-display .number {
+  .last-five .number {
     font-size: 2.5rem;
     min-width: 3.125rem;
   }
@@ -257,6 +274,10 @@
   }
 
   .last-extracted-display {
+    align-items: center;
+  }
+
+  .last-five {
     justify-content: center;
   }
 

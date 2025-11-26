@@ -2,7 +2,12 @@
   <div class="board-header">
     <div class="last-extracted-display">
       <span class="label">{{ 'game.board.last_extracted' | translate }}</span>
-      <span class="number">{{ lastExtracted?.value || '-' }}</span>
+      <div class="last-five">
+        @for (n of lastFive; track $index) {
+        <span class="number">{{ n }}</span> <!-- Black -->
+        }
+        <span class="number">{{ lastExtracted?.value || '-' }}</span>
+      </div>
     </div>
 
     @if (lobbyService.isHost) {
