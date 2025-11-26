@@ -34,7 +34,7 @@
     "game": {
         "title": "Tombola di Natale",
         "room": "Stanza",
-        "won": "vinto",
+        "won": "vinto da",
         "players": "Giocatori",
         "exit": "Esci dalla partita",
         "board.title": "Tabellone",

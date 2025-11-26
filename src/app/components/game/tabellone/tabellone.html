@@ -25,7 +25,9 @@
 }
 
 @if (endGame) {
-<p class="title">{{ 'game.board.end_extractions' | translate }}</p>
+<p class="tabellone-status">
+    {{ 'game.board.end_extractions' | translate }}
+</p>
 }
 @if (lobbyService.isHost || (!isPaused && !endGame)) {
 <div class="tabellone">
@@ -42,7 +44,7 @@
 }
 
 @if (!lobbyService.isHost && isPaused) {
-<div class="paused-message">
+<p class="tabellone-status">
     {{ 'game.board.draw.paused' | translate }}
-</div>
+</p>
 }

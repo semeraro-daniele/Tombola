@@ -30,10 +30,11 @@
     <div class="last-action-banner">
         🎉
         {{ lastAction.toUpperCase() }}
+        {{ 'game.won' | translate }}
         @if (lastWinner) {
-        ({{ lastWinner }})
+        {{ lastWinner }}
         }
-        {{ 'game.won' | translate }}! 🎉
+        🎉
     </div>
     }
 

@@ -11,10 +11,6 @@
     box-sizing: border-box;
 }
 
-.title {
-    text-align: center;
-}
-
 .draw-controls {
     align-items: center;
     margin-bottom: 1rem;
@@ -48,7 +44,7 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
-.paused-message {
+.tabellone-status {
     text-align: center;
     font-size: 2.25rem;
     color: #c41e3a;
