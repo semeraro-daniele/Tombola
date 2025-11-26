@@ -14,7 +14,6 @@ Tombola is a modern web implementation of the classic Italian bingo-style game. 
 **Repository layout (important files):**
 - `src/`: Angular app sources.
 - `back-end/server.js`: Node.js server for development multiplayer (listens on port 3000).
-- `back-end/server_rasp.js`: Node.js server that also serves static files from `back-end/dist` (useful for production on small devices / Raspberry Pi).
 
 **How the game works (brief):**
 - Each multiplayer room has a host (creator) who can start the game, set draw interval, pause/resume the auto-draw, and the server authoritatively announces drawn numbers to all clients.
@@ -76,9 +75,9 @@ The app will then be served from the Node server at `http://localhost:3000/`.
 
 ## Running on a Raspberry Pi or small VPS
 
-- Build with `ng build --output-path back-end/dist --configuration production` on your machine or on-device.
+- Build with `ng build --configuration production` on your machine or on-device.
 - Transfer the repository to the device (or build on-device if Node and Angular CLI installed).
-- Run `node back-end/server_rasp.js` to serve the static frontend and Socket.IO endpoint from a single process.
+- Run `node back-end/server.js` to serve the static frontend and Socket.IO endpoint from a single process.
 
 ## Single-player vs Multiplayer
 
