@@ -14,29 +14,32 @@ function generateRoomCode(len = 4) {
   return code;
 }
 
-/**
- * startAutoDraw: avvia l'auto-draw per la stanza indicata
- * - legge room.drawIntervalMs
- * - evita multipli setInterval
- * - si ferma quando tutti i numeri sono estratti
- */
+function startGame(roomCode) {
+  const room = rooms[roomCode];
+  if (!room || room.gameStarted) return false;
+
+  room.gameStarted = true;
+  room.paused = false;
+
+  console.log(`🎮 Game started in room ${roomCode}`);
+
+  if (room.autoResumeTimeout) {
+    clearTimeout(room.autoResumeTimeout);
+    room.autoResumeTimeout = null;
+  }
+
+  io.to(roomCode).emit("autoDrawResumed");
+  io.to(roomCode).emit("gameStarted");
+
+  startAutoDraw(roomCode);
+  return true;
+}
+
 function startAutoDraw(roomCode) {
   const room = rooms[roomCode];
-  if (!room) return;
-
-  if (room.autoDrawInterval) {
-    console.log(`⚠️ AutoDraw already running in room ${roomCode}`);
-    return;
-  }
-
-  if (!room.gameStarted) {
-    console.log(`⚠️ Cannot start autodraw: game not started for room ${roomCode}`);
-    return;
-  }
+  if (!room || room.autoDrawInterval || !room.gameStarted) return;
 
   console.log(`🚀 Starting auto-draw for room ${roomCode} (interval ${room.drawIntervalMs}ms)`);
-
-  const intervalMs = room.drawIntervalMs || 3000;
 
   room.autoDrawInterval = setInterval(() => {
     if (!rooms[roomCode]) {
@@ -44,9 +47,7 @@ function startAutoDraw(roomCode) {
       return;
     }
 
-    if (room.paused) {
-      return;
-    }
+    if (room.paused) return;
 
     if (room.extracted.length >= 90) {
       clearInterval(room.autoDrawInterval);
@@ -63,37 +64,32 @@ function startAutoDraw(roomCode) {
 
     room.extracted.push(num);
     io.to(roomCode).emit("numberDrawn", num);
-  }, intervalMs);
+  }, room.drawIntervalMs || 3000);
 }
 
-/**
- * startGame: avvia lo stato di gioco per la stanza
- * - imposta room.gameStarted = true
- * - avvia auto-draw se richiesto (room.autoStart true)
- * - emette "gameStarted" nello room
- */
-function startGame(roomCode) {
+function pauseAutoDraw(roomCode) {
   const room = rooms[roomCode];
-  if (!room) return false;
-
-  if (room.gameStarted) {
-    console.log(`⚠️ Game already started for room ${roomCode}`);
-    return false;
-  }
-
-  room.gameStarted = true;
-  console.log(`🎮 Game started in room ${roomCode}`);
-
-  startAutoDraw(roomCode);
-
-  io.to(roomCode).emit("gameStarted");
-  return true;
+  clearAutoDrawInterval(room);
+  clearAutoResumeTimeout(room);
+  room.paused = true;
+  io.to(roomCode).emit("autoDrawPaused");
 }
 
-// Helper: build state object to return to clients
+function resumeAutoDraw(roomCode) {
+  const room = rooms[roomCode];
+  clearAutoResumeTimeout(room);
+  room.paused = false;
+  io.to(roomCode).emit("autoDrawResumed");
+
+  if (room.gameStarted && !room.autoDrawInterval) {
+    startAutoDraw(roomCode);
+  }
+}
+
 function buildRoomStateForClient(roomCode) {
   const room = rooms[roomCode];
   if (!room) return null;
+
   return {
     roomCode,
     ok: true,
@@ -110,26 +106,25 @@ function buildRoomStateForClient(roomCode) {
   };
 }
 
-// SOCKET.IO
+function clearAutoDrawInterval(room) {
+  if (room.autoDrawInterval) {
+    clearInterval(room.autoDrawInterval);
+    room.autoDrawInterval = null;
+  }
+}
+
+function clearAutoResumeTimeout(room) {
+  if (room.autoResumeTimeout) {
+    clearTimeout(room.autoResumeTimeout);
+    room.autoResumeTimeout = null;
+  }
+}
+
 io.on("connection", (socket) => {
   console.log("Client connected:", socket.id);
 
-  /**
-   * createRoom
-   * payload can be:
-  *  - string -> playerName (multiplayer)
-   *  - object -> { playerName } (payload object)
-   *
-   * Always returns full room state (including hostId).
-   */
   socket.on("createRoom", (payload, callback) => {
-    let playerName = "";
-
-    if (typeof payload === "string") {
-      playerName = payload;
-    } else if (payload && typeof payload === "object") {
-      playerName = payload.playerName || "";
-    }
+    const playerName = typeof payload === "string" ? payload : (payload?.playerName || "");
 
     let code;
     do {
@@ -137,7 +132,7 @@ io.on("connection", (socket) => {
     } while (rooms[code]);
 
     rooms[code] = {
-      players: [],
+      players: [{ id: socket.id, name: playerName }],
       extracted: [],
       gameStarted: false,
       hostId: socket.id,
@@ -145,36 +140,31 @@ io.on("connection", (socket) => {
       paused: false,
       autoStart: false,
       autoDrawInterval: null,
+      autoResumeTimeout: null,
       completedActions: [],
       completedWinners: {},
       nextAction: "ambo"
     };
 
-    // Join room
     socket.join(code);
-    rooms[code].players.push({ id: socket.id, name: playerName });
-
     console.log(`Room ${code} created by ${playerName} (${socket.id})`);
 
-    // Reply to creator with full room state (always include hostId)
-    const state = buildRoomStateForClient(code);
-    if (typeof callback === "function") callback(state);
+    if (typeof callback === "function") {
+      callback(buildRoomStateForClient(code));
+    }
 
-    // Broadcast players update
     io.to(code).emit("playersUpdate", rooms[code].players);
   });
 
-  // Join Room
   socket.on("joinRoom", ({ roomCode, playerName }, callback) => {
     const room = rooms[roomCode];
+
     if (!room) {
-      if (typeof callback === "function") callback({ error: "Stanza non trovata" });
-      return;
+      return callback?.({ error: "Stanza non trovata" });
     }
 
     if (room.players.some((p) => p.name === playerName)) {
-      if (typeof callback === "function") callback({ error: "Nome già in uso in questa stanza" });
-      return;
+      return callback?.({ error: "Nome già in uso in questa stanza" });
     }
 
     socket.join(roomCode);
@@ -182,10 +172,7 @@ io.on("connection", (socket) => {
 
     console.log(`${playerName} (${socket.id}) joined room ${roomCode}`);
 
-    // Return full room state so client can sync
-    const state = buildRoomStateForClient(roomCode);
-    if (typeof callback === "function") callback(state);
-
+    callback?.(buildRoomStateForClient(roomCode));
     io.to(roomCode).emit("playersUpdate", room.players);
   });
 
@@ -194,88 +181,62 @@ io.on("connection", (socket) => {
     if (!room) return;
 
     if (room.hostId !== socket.id) {
-      socket.emit("error", "Solo l'host può avviare la partita");
-      return;
+      return socket.emit("error", "Solo l'host può avviare la partita");
     }
 
     if (!room.autoStart && room.players.length < 2) {
-      socket.emit("error", "Servono almeno 2 giocatori per iniziare");
-      return;
+      return socket.emit("error", "Servono almeno 2 giocatori per iniziare");
     }
 
     startGame(roomCode);
   });
 
-  // setDrawInterval (host-only)
   socket.on("setDrawInterval", ({ roomCode, ms } = {}) => {
     const room = rooms[roomCode];
     if (!room) return;
+
     if (socket.id !== room.hostId) {
-      socket.emit("error", "Solo l'host può cambiare la velocità di estrazione");
-      return;
+      return socket.emit("error", "Solo l'host può cambiare la velocità di estrazione");
     }
 
-    const n = Number(ms) || 3000;
-    const clamped = Math.max(3000, Math.min(15000, Math.round(n)));
-    room.drawIntervalMs = clamped;
+    room.drawIntervalMs = Math.max(3000, Math.min(15000, Math.round(Number(ms) || 3000)));
 
-    // Notify all clients
-    io.to(roomCode).emit("drawIntervalChanged", clamped);
+    io.to(roomCode).emit("drawIntervalChanged", room.drawIntervalMs);
 
-    // If auto-draw is active, restart it with the new interval
     if (room.autoDrawInterval) {
-      clearInterval(room.autoDrawInterval);
-      room.autoDrawInterval = null;
+      clearAutoDrawInterval(room);
       if (!room.paused && room.gameStarted) {
         startAutoDraw(roomCode);
       }
     }
   });
 
-  // pauseAutoDraw (host-only)
   socket.on("pauseAutoDraw", (roomCode) => {
     const room = rooms[roomCode];
-    if (!room) return;
-    if (socket.id !== room.hostId) {
-      socket.emit("error", "Solo l'host può mettere in pausa l'estrazione");
-      return;
+    if (!room || socket.id !== room.hostId) {
+      return socket.emit("error", "Solo l'host può mettere in pausa l'estrazione");
     }
 
-    if (room.autoDrawInterval) {
-      clearInterval(room.autoDrawInterval);
-      room.autoDrawInterval = null;
-    }
-    room.paused = true;
-    io.to(roomCode).emit("autoDrawPaused");
+    pauseAutoDraw(roomCode);
     console.log(`⏸️ AutoDraw paused in ${roomCode} by ${socket.id}`);
   });
 
-  // resumeAutoDraw (host-only)
   socket.on("resumeAutoDraw", (roomCode) => {
     const room = rooms[roomCode];
-    if (!room) return;
-    if (socket.id !== room.hostId) {
-      socket.emit("error", "Solo l'host può riavviare l'estrazione");
-      return;
+    if (!room || socket.id !== room.hostId) {
+      return socket.emit("error", "Solo l'host può riavviare l'estrazione");
     }
 
-    room.paused = false;
-    io.to(roomCode).emit("autoDrawResumed");
+    resumeAutoDraw(roomCode);
     console.log(`▶️ AutoDraw resumed in ${roomCode} by ${socket.id}`);
-
-    if (room.gameStarted && !room.autoDrawInterval) {
-      startAutoDraw(roomCode);
-    }
   });
 
-  // declareWin (server authoritative)
   socket.on("declareWin", (data, callback) => {
     const { roomCode, action, player } = data || {};
     const room = rooms[roomCode];
 
     if (!room) {
-      if (typeof callback === "function") callback({ ok: false, error: "Stanza non trovata" });
-      return;
+      return callback?.({ ok: false, error: "Stanza non trovata" });
     }
 
     const order = ["ambo", "terna", "quaterna", "cinquina", "tombola"];
@@ -283,17 +244,15 @@ io.on("connection", (socket) => {
     if (room.nextAction !== action) {
       const msg = `Non puoi dichiarare ${action}. La prossima azione è: ${room.nextAction}`;
       socket.emit("error", msg);
-      if (typeof callback === "function") callback({ ok: false, error: msg });
-      return;
+      return callback?.({ ok: false, error: msg });
     }
 
     room.completedActions.push(action);
     const currentIndex = order.indexOf(action);
     room.nextAction = currentIndex < order.length - 1 ? order[currentIndex + 1] : null;
+    room.completedWinners[action] = socket.id;
 
     console.log(`✅ ${player} HA VINTO ${action} in ${roomCode}! Next action: ${room.nextAction}`);
-
-    room.completedWinners[action] = socket.id;
 
     const payload = {
       action,
@@ -305,59 +264,68 @@ io.on("connection", (socket) => {
     };
 
     io.to(roomCode).emit("winDeclared", payload);
-    if (typeof callback === "function") callback({ ok: true, ...payload });
+    callback?.({ ok: true, ...payload });
+
+    // Pause for 5 seconds, then auto-resume
+    pauseAutoDraw(roomCode);
+    console.log(`⏸️ AutoDraw auto-paused for 5s in ${roomCode}`);
+
+    room.autoResumeTimeout = setTimeout(() => {
+      if (!rooms[roomCode]) return;
+
+      const r = rooms[roomCode];
+      r.autoResumeTimeout = null;
+
+      if (!r.paused) return;
+
+      resumeAutoDraw(roomCode);
+      console.log(`▶️ AutoDraw auto-resumed after 5s in ${roomCode}`);
+    }, 5000);
   });
 
-  // handle disconnect: remove player, reassign host if needed, cleanup room
   socket.on("disconnect", () => {
     console.log("Client disconnected:", socket.id);
 
     for (const code of Object.keys(rooms)) {
       const room = rooms[code];
       const idx = room.players.findIndex((p) => p.id === socket.id);
-      if (idx >= 0) {
-        const playerName = room.players[idx].name;
-        room.players.splice(idx, 1);
 
-        console.log(`${playerName} left room ${code}`);
-        io.to(code).emit("playersUpdate", room.players);
+      if (idx === -1) continue;
 
-        // If host left, cleanup autoDraw and reassign
-        if (room.hostId === socket.id) {
-          if (room.autoDrawInterval) {
-            clearInterval(room.autoDrawInterval);
-            room.autoDrawInterval = null;
-          }
+      const playerName = room.players[idx].name;
+      room.players.splice(idx, 1);
 
-          if (room.players.length > 0) {
-            room.hostId = room.players[0].id;
-            console.log(`👑 New host for room ${code}: ${room.players[0].name}`);
-            io.to(code).emit("hostChanged", { hostId: room.hostId });
+      console.log(`${playerName} left room ${code}`);
+      io.to(code).emit("playersUpdate", room.players);
 
-            // If game was started (autoStart true or normal game started), resume autodraw
-            if (room.gameStarted) {
-              // Ensure autodraw running with new host
-              if (!room.autoDrawInterval && !room.paused) {
-                startAutoDraw(code);
-              }
-            }
+      // Host left: cleanup and reassign
+      if (room.hostId === socket.id) {
+        clearAutoDrawInterval(room);
+
+        if (room.players.length > 0) {
+          room.hostId = room.players[0].id;
+          console.log(`👑 New host for room ${code}: ${room.players[0].name}`);
+          io.to(code).emit("hostChanged", { hostId: room.hostId });
+
+          if (room.gameStarted && !room.autoDrawInterval && !room.paused) {
+            startAutoDraw(code);
           }
         }
-
-        // If no players left, delete room
-        if (room.players.length === 0) {
-          if (room.autoDrawInterval) clearInterval(room.autoDrawInterval);
-          delete rooms[code];
-          console.log(`🗑️ Room ${code} deleted`);
-        }
-
-        break;
       }
+
+      // No players left: delete room
+      if (room.players.length === 0) {
+        clearAutoDrawInterval(room);
+        clearAutoResumeTimeout(room);
+        delete rooms[code];
+        console.log(`🗑️ Room ${code} deleted`);
+      }
+
+      break;
     }
   });
 });
 
-// Start server
 server.listen(3000, () => {
   console.log("🎄 Tombola server listening on port 3000");
 });
