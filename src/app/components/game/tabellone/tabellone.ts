@@ -16,10 +16,8 @@ import { LobbyService } from '../../../services/lobby.service';
   styleUrl: './tabellone.css',
 })
 export class Tabellone implements OnInit, OnDestroy {
-  extracts: Extract[] = [];
+  numbers: Extract[] = [];
   lastExtracted: Extract | null = null;
-  lastFive: number[] = [];
-  rows: Extract[][] = [];
   endGame: boolean = false;
 
   private destroy$ = new Subject<void>();
@@ -37,28 +35,26 @@ export class Tabellone implements OnInit, OnDestroy {
   ngOnInit() {
     this.translate.use(this.languageService.getLanguage());
 
-    this.extracts = this.tabelloneService.getExtractions();
-    this._makeRows();
+    this.numbers = this.tabelloneService.getExtractions();
 
-    // Sottoscrivi ai nuovi numeri estratti (lista completa)
+    // Subscribe to the full list of extracted numbers
     this.lobbyService.extractedNumbers$.pipe(takeUntil(this.destroy$)).subscribe((numbers) => {
       this._updateExtracts(numbers);
     });
 
+    // Subscribe to the new number drawn
     this.lobbyService.newNumber$.pipe(takeUntil(this.destroy$)).subscribe((num) => {
       if (num !== null) {
-        const extract = this.extracts.find((e) => e.value === num);
+        const extract = this.numbers.find((e) => e.value === num);
         if (extract) {
           this.lastExtracted = extract;
           extract.isExtracted = true;
-          this._makeRows();
         }
       }
     });
 
     // Subscribe to draw controls
     this.lobbyService.drawIntervalMs$.pipe(takeUntil(this.destroy$)).subscribe((ms) => {
-      // convert to seconds and clamp
       const secs = Math.round(ms / 1000);
       this.drawSeconds = Math.max(3, Math.min(15, secs));
     });
@@ -75,14 +71,14 @@ export class Tabellone implements OnInit, OnDestroy {
 
   // Update the state of extracted numbers and check if the game has ended
   private _updateExtracts(extractedNumbers: number[]) {
-    this.extracts.forEach((extract) => {
+    this.numbers.forEach((extract) => {
       extract.isExtracted = extractedNumbers.includes(extract.value);
     });
 
-    // Imposta l'ultimo numero estratto
+    // Set the last extracted number
     if (extractedNumbers.length > 0) {
       const lastNumber = extractedNumbers[extractedNumbers.length - 1];
-      const extract = this.extracts.find((e) => e.value === lastNumber);
+      const extract = this.numbers.find((e) => e.value === lastNumber);
       if (extract) {
         this.lastExtracted = extract;
       }
@@ -90,26 +86,13 @@ export class Tabellone implements OnInit, OnDestroy {
       this.lastExtracted = null;
     }
 
-    // Aggiorna gli ultimi 5 numeri
-    this.lastFive = extractedNumbers.slice(-6, -1);
-
-    this._makeRows();
-
-    // Controlla se il gioco è finito
+    // Check if the game is over
     if (extractedNumbers.length >= 90) {
       this.endGame = true;
     }
   }
 
-  private _makeRows() {
-    this.rows = [];
-    for (let i = 0; i < this.extracts.length; i += 10) {
-      this.rows.push(this.extracts.slice(i, i + 10));
-    }
-  }
-
   // Called when slider changes (seconds)
-  // Adjust the draw speed based on user input
   onDrawSpeedChange(secs: any) {
     const n = Number(secs);
     const clamped = Math.max(3, Math.min(15, Math.round(n)));

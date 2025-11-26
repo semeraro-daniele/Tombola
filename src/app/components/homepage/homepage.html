@@ -1,37 +1,38 @@
 <div class="home-container">
-  <h1 class="titolo-home">
-    🎄 {{ 'homepage.welcome' | translate }} 🎄
-  </h1>
+  <div class="header">
+    <h1 class="title">🎄 {{ 'homepage.welcome' | translate }} 🎄</h1>
+    <p class="subtitle">{{ 'homepage.subtitle' | translate }}</p>
+  </div>
 
-  <!-- Selezione modalità -->
   @if (!showMultiplayerOptions) {
   <div class="mode-selection">
     <button class="btn-mode btn-single" (click)="onStartSinglePlayer()">
+      <i class="icon">👤</i>
       <span class="btn-text">{{ 'homepage.single' | translate }}</span>
       <span class="btn-description">{{ 'homepage.single.description' | translate }}</span>
     </button>
 
     <button class="btn-mode btn-multi" (click)="onShowMultiplayerOptions()">
+      <i class="icon">👥</i>
       <span class="btn-text">{{ 'homepage.multi' | translate }}</span>
       <span class="btn-description">{{ 'homepage.multi.description' | translate }}</span>
     </button>
   </div>
-  }
-
-  <!-- Opzioni Multiplayer -->
-  @if (showMultiplayerOptions) {
+  } @else {
   <div class="multiplayer-options">
     <button class="btn-back" (click)="onBackToModeSelection()">
-      ← {{ 'common.back' | translate }}
+      <i class="icon">←</i> {{ 'common.back' | translate }}
     </button>
 
-    <div class="multiplayer-buttons">
-      <button class="btn-multiplayer-action btn-create" (click)="onCreateGame()">
+    <div class="multiplayer-actions">
+      <button class="btn-action btn-create" (click)="onCreateGame()">
+        <i class="icon">✨</i>
         <span class="action-text">{{ 'homepage.create' | translate }}</span>
         <span class="action-description">{{ 'homepage.create.description' | translate }}</span>
       </button>
 
-      <button class="btn-multiplayer-action btn-join" (click)="onJoinGame()">
+      <button class="btn-action btn-join" (click)="onJoinGame()">
+        <i class="icon">🔗</i>
         <span class="action-text">{{ 'homepage.join' | translate }}</span>
         <span class="action-description">{{ 'homepage.join.description' | translate }}</span>
       </button>

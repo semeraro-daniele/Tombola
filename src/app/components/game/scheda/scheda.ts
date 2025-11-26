@@ -17,7 +17,7 @@ import type { Extract } from '../../../models/extract';
   styleUrl: './scheda.css',
 })
 export class Scheda implements OnInit, OnDestroy {
-  scheda: Extract[][] = [];
+  cardNumbers: Extract[] = [];
   nextAction: CallActionType | null = null;
   completedActions: CallActionType[] = [];
   isDeclaring = false;
@@ -34,9 +34,8 @@ export class Scheda implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.translate.use(this.languageService.getLanguage());
-    this.scheda = this.gameService.getScheda();
+    this.cardNumbers = this.gameService.getScheda().flat();
 
-    // Sottoscrizioni allo stato della lobby
     this.subscription = new Subscription();
     this.subscription.add(
       this.lobby.nextAction$.subscribe((na) => {
@@ -51,29 +50,24 @@ export class Scheda implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Clean up subscriptions when the component is destroyed
     this.subscription?.unsubscribe();
   }
 
   extractedNumber(cell: Extract): void {
-    // Toggle the extracted state of a number on the scheda
     if (cell.value === 0) return;
     cell.isExtracted = !cell.isExtracted;
   }
 
   callAction(action: CallActionType) {
-    // Validate and declare a game action (e.g., win)
-    // 1. Verifica se questa è l'azione corretta da chiamare
     if (this.nextAction !== action) {
-      alert(`Devi chiamare ${this.nextAction?.toUpperCase()} prima di ${action.toUpperCase()}!`);
+      alert(`You must call ${this.nextAction?.toUpperCase()} before ${action.toUpperCase()}!`);
       return;
     }
 
-    // 2. Ottieni i numeri estratti dal tabellone
     const extractedNumbers = this.gameService.getExtractedNumbers();
+    const scheda2D = this.gameService.getScheda(); 
 
-    // 3. Valida che tutti i numeri segnati siano stati estratti
-    const validation = this.schedaService.validateScheda(this.scheda, extractedNumbers);
+    const validation = this.schedaService.validateScheda(scheda2D, extractedNumbers);
     if (!validation.isValid) {
       alert(validation.message);
       if (validation.invalidNumbers && validation.invalidNumbers.length > 0) {
@@ -82,8 +76,7 @@ export class Scheda implements OnInit, OnDestroy {
       return;
     }
 
-    // 4. Controlla se l'azione è corretta
-    const actionCheck = this.schedaService.checkAction(action, this.scheda, extractedNumbers);
+    const actionCheck = this.schedaService.checkAction(action, scheda2D, extractedNumbers);
     if (!actionCheck.isValid) {
       alert(actionCheck.message);
       return;
@@ -93,31 +86,26 @@ export class Scheda implements OnInit, OnDestroy {
     this.lobby
       .declareWin(action)
       .then(() => {
-        // Il server ha confermato; aggiorna anche il GameService localmente
         this.gameService.completeAction(action);
         this.isDeclaring = false;
         alert(actionCheck.message);
       })
       .catch((err) => {
-        const msg = err?.error || (typeof err === 'string' ? err : 'Errore nella dichiarazione');
+        const msg = err?.error || (typeof err === 'string' ? err : 'Error during declaration');
         alert(msg);
         this.isDeclaring = false;
       });
   }
 
-  // Check if a specific action is currently enabled
   isActionEnabled(action: CallActionType): boolean {
     return this.nextAction === action;
   }
 
-  // Check if a specific action has been completed
   isActionCompleted(action: CallActionType): boolean {
     return this.completedActions.includes(action);
   }
 
-  // Ritorna true se l'azione è completata E il vincitore è il giocatore locale
   isActionCompletedByMe(action: CallActionType): boolean {
-    // Check if the current player completed a specific action
     if (!this.completedActions.includes(action)) return false;
     const winners = this.lobby.completedWinners$.value;
     const winnerId = winners ? (winners[action] as string | null) : null;
@@ -125,8 +113,7 @@ export class Scheda implements OnInit, OnDestroy {
   }
 
   private _highlightInvalidNumbers(invalidNumbers: number[]): void {
-    // Temporarily highlight invalid numbers on the scheda
-    this.scheda.flat().forEach((cell) => {
+    this.cardNumbers.forEach((cell) => {
       if (invalidNumbers.includes(cell.value)) {
         const wasExtracted = cell.isExtracted;
         cell.isExtracted = false;

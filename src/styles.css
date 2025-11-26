@@ -1,20 +1,151 @@
-/* You can add global styles to this file, and also import other style files */
-.btn-back {
-  margin-top: 2rem;
-  padding: 0.875rem 1.375rem;
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --primary-color: #c41e3a; /* A festive red */
+  --secondary-color: #16a34a; /* A complementary green */
+  --background-color: #f8f9fa;
+  --text-color: #343a40;
+  --white: #ffffff;
+  --border-color: #dee2e6;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 0.75rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.5rem;
   cursor: pointer;
-  border: 0.125rem solid #c41e3a;
-  background: #ffffff;
-  transition: 0.2s ease;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--white);
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.btn-secondary {
+  background-color: var(--white);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.btn-primary-filled {
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.btn-primary-filled:hover {
+  background-color: #166534;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.btn-secondary-filled {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-secondary-filled:hover {
+  background-color: #a01829;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.btn-back {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: 2px solid var(--primary-color);
+  background: transparent;
+  color: var(--primary-color);
+  transition: all 0.3s ease;
 }
 
 .btn-back:hover {
-  background: #fef2f2;
-  border-color: #a01829;
-  color: #a01829;
-  transform: translateY(-0.125rem);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  background: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.card {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.form-control {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
 }

@@ -1,50 +1,34 @@
-<h4>{{ 'game.board.title' | translate }}:</h4>
-
-<div class="last-extractions">
-    <h4>{{ 'game.board.last_extracted' | translate }}:</h4>
-    <div class="last-five">
-        @for (n of lastFive; track $index) {
-        <span class="last-num">{{ n }}</span>
-        }
-        @if (lastExtracted) {
-        <span class="last-num last">{{ lastExtracted.value }}</span>
-        }
+<div class="tabellone-container">
+  <div class="board-header">
+    <div class="last-extracted-display">
+      <span class="label">{{ 'game.board.last_extracted' | translate }}</span>
+      <span class="number">{{ lastExtracted?.value || '-' }}</span>
     </div>
-</div>
-
-@if (lobbyService.isHost) {
-<div class="draw-controls">
-    <div class="draw-speed-control">
-        <label>{{ 'game.board.draw.speed' | translate }}: {{ drawSeconds }}s</label>
-        <input type="range" min="3" max="15" step="1" [value]="drawSeconds"
-            (input)="onDrawSpeedChange($event.target.value)">
-    </div>
-    <button class="btn-pause-resume" (click)="togglePause()">{{ isPaused ? ('game.board.draw.resume' | translate) :
-        ('game.board.draw.pause' | translate) }}</button>
-</div>
-}
-
-@if (endGame) {
-<p class="tabellone-status">
-    {{ 'game.board.end_extractions' | translate }}
-</p>
-}
-@if (lobbyService.isHost || (!isPaused && !endGame)) {
-<div class="tabellone">
-    @for (row of rows; track $index) {
-    <div class="riga">
-        @for (extract of row; track extract.value) {
-        <div class="cella" [class.estratto]="extract.isExtracted">
-            {{ extract.value }}
-        </div>
-        }
+    @if (lobbyService.isHost) {
+    <div class="host-controls">
+      <div class="speed-control">
+        <label for="speed-slider">{{ 'game.board.draw.speed' | translate }}</label>
+        <input id="speed-slider" type="range" min="3" max="15" [value]="drawSeconds" (input)="onDrawSpeedChange($event.target.value)" />
+        <span>{{ drawSeconds }}s</span>
+      </div>
+      <button class="btn btn-secondary" (click)="togglePause()">
+        {{ isPaused ? ('game.board.draw.resume' | translate) : ('game.board.draw.pause' | translate) }}
+      </button>
     </div>
     }
-</div>
-}
+  </div>
 
-@if (!lobbyService.isHost && isPaused) {
-<p class="tabellone-status">
-    {{ 'game.board.draw.paused' | translate }}
-</p>
-}
+  @if (endGame) {
+  <p class="tabellone-status">{{ 'game.board.end_extractions' | translate }}</p>
+  } @else if (!lobbyService.isHost && isPaused) {
+  <p class="tabellone-status">{{ 'game.board.draw.paused' | translate }}</p>
+  } @else {
+  <div class="tabellone">
+    @for (extract of numbers; track extract.value) {
+    <div class="cell" [class.extracted]="extract.isExtracted">
+      {{ extract.value }}
+    </div>
+    }
+  </div>
+  }
+</div>

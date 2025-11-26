@@ -39,15 +39,14 @@
   </div>
   }
 
-  <!-- Pulsanti -->
   <div class="lobby-actions">
-    <button class="btn-secondary" (click)="onLeave()">
-      ← {{ 'lobby.leave' | translate }}
+    <button class="btn btn-secondary" (click)="onLeave()">
+      <i class="icon">🚪</i> {{ 'lobby.leave' | translate }}
     </button>
 
     @if (isHost) {
-    <button class="btn-primary" (click)="onStartGame()">
-      🎮 {{ 'lobby.start_game' | translate }}
+    <button class="btn btn-primary-filled" (click)="onStartGame()" [disabled]="players.length < 2">
+      <i class="icon">🎮</i> {{ 'lobby.start_game' | translate }}
     </button>
     }
   </div>

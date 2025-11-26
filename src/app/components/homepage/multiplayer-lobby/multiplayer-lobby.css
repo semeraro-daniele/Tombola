@@ -135,33 +135,40 @@
   margin-top: 1.25rem;
 }
 
+/* Buttons */
 .btn-secondary,
 .btn-primary {
-  padding: 0.875rem 1.375rem;
+  padding: 0.875rem 1.25rem;
   border: 0.125rem solid #e8e8e8;
   border-radius: 0.75rem;
-  background: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 1rem;
-  font-weight: 600;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.05);
 }
 
-/* Exit */
-.btn-secondary:hover {
-  background: #fef2f2;
-  border-color: #c41e3a;
-  color: #a01829;
-}
-
-/* Host */
+/* Start */
 .btn-primary {
   border-color: #16a34a;
+  color: #16a34a;
 }
 
 .btn-primary:hover {
   background: #f0fdf4;
-  border-color: #166534;
+}
+
+/* Exit */
+.btn-secondary {
+  border-color: #c41e3a;
+  color: #a01829;
+}
+
+.btn-secondary:hover {
+  background: #fef2f2;
 }
 
 /* Info players */

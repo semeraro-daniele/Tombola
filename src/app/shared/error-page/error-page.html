@@ -1,11 +1,7 @@
-<div>
-    <div>
-        <h1>
-            <strong>{{ 'error-page.404' | translate }}</strong>
-        </h1>
-    </div>
-
-    <div>
-        <button style="cursor: pointer;" [routerLink]="'/homepage'">{{ 'error-page.back-home' | translate }}</button>
-    </div>
+<div class="error-container">
+  <div class="card text-center">
+    <h1 class="error-title">{{ 'error-page.404' | translate }}</h1>
+    <p class="error-description">{{ 'error-page.description' | translate }}</p>
+    <a routerLink="/homepage" class="btn btn-primary">{{ 'error-page.back-home' | translate }}</a>
+  </div>
 </div>
