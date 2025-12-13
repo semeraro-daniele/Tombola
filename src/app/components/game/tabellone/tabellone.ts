@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { LobbyService } from '../../../services/lobby.service';
 @Component({
   selector: 'app-tabellone',
   standalone: true,
-  imports: [TranslateModule, CommonModule],
+  imports: [TranslateModule],
   templateUrl: './tabellone.html',
   styleUrl: './tabellone.css',
 })
@@ -31,7 +31,7 @@ export class Tabellone implements OnInit, OnDestroy {
     private translate: TranslateService,
     private tabelloneService: TabelloneService,
     public lobbyService: LobbyService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.translate.use(this.languageService.getLanguage());

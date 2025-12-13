@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -8,7 +8,7 @@ import { LanguageService } from '../../services/language.service';
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [TranslateModule, CommonModule],
+  imports: [TranslateModule],
   templateUrl: './homepage.html',
   styleUrl: './homepage.css',
 })
@@ -19,7 +19,7 @@ export class Homepage implements OnInit {
     private languageService: LanguageService,
     private translate: TranslateService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.translate.use(this.languageService.getLanguage());

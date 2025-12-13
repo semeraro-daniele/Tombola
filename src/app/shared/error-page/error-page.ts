@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -9,8 +9,7 @@ import { LanguageService } from '../../services/language.service';
 @Component({
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterModule, 
+    RouterModule,
     TranslateModule
   ],
   selector: 'app-error-page',
@@ -18,9 +17,9 @@ import { LanguageService } from '../../services/language.service';
 })
 export class ErrorPage implements OnInit {
   constructor(
-    private languageService: LanguageService, 
+    private languageService: LanguageService,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.translate.use(this.languageService.getLanguage());

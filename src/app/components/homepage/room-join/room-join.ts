@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -9,7 +9,7 @@ import { LobbyService } from '../../../services/lobby.service';
 @Component({
   selector: 'app-room-join',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule],
+  imports: [FormsModule, TranslateModule],
   templateUrl: './room-join.html',
   styleUrl: './room-join.css',
 })
@@ -22,7 +22,7 @@ export class RoomJoin implements OnInit {
     private translate: TranslateService,
     private lobby: LobbyService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.translate.use(this.languageService.getLanguage());

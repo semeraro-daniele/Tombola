@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,7 +10,7 @@ import { LobbyService } from '../../../services/lobby.service';
 @Component({
   selector: 'app-multiplayer-lobby',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [TranslateModule],
   templateUrl: './multiplayer-lobby.html',
   styleUrl: './multiplayer-lobby.css',
 })
@@ -28,7 +28,7 @@ export class MultiplayerLobby implements OnInit, OnDestroy {
     private translate: TranslateService,
     private lobby: LobbyService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.translate.use(this.languageService.getLanguage());

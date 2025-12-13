@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
@@ -12,7 +12,7 @@ import type { Extract } from '../../../models/extract';
 @Component({
   selector: 'app-scheda',
   standalone: true,
-  imports: [TranslateModule, CommonModule],
+  imports: [TranslateModule],
   templateUrl: './scheda.html',
   styleUrl: './scheda.css',
 })
@@ -30,7 +30,7 @@ export class Scheda implements OnInit, OnDestroy {
     private schedaService: SchedaService,
     private gameService: GameService,
     private lobby: LobbyService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.translate.use(this.languageService.getLanguage());
